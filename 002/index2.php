@@ -5,6 +5,6 @@
 
 define("PI", 3.14, false);
 
-echo "O valor de PI é: " .PI. 
+echo "O valor de PI é: " .PI; 
 
 ?>
