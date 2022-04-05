@@ -1,6 +1,17 @@
 <?php 
 
-    $type = 'photo';
+    // php 10x10 hífens
+
+    $num=0;
+
+    for($num =0 ; $num < 10; $num++){
+        for ($v=0; $v<10; $v++){
+            echo '-';
+        }
+        echo '<br>';
+    } 
+
+    /*$type = 'photo';
 
     switch($type){
         case 'photo':echo'exibindo uma foto';break;
@@ -9,9 +20,6 @@
         default:echo 'valor invalido';break;
 
     }
-
-
-
 
     if ($type == 'photo'){
         echo 'exibindo uma foto';

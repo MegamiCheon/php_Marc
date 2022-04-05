@@ -10,3 +10,5 @@ $ - declara variavel
 arrays
 
 null lao - teste de condicional - estrutura de decisão
+
+repetição While - am
