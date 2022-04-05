@@ -1,0 +1,10 @@
+https://www.php.net - php
+
+$ - declara variavel
+
+"" mostra o que tem dentro da var
+'' mostra só o nome da var
+
+. é a ligação entre um valor e outro == $nomeCompleto = $nome. " " .$sobrenome
+
+arrays 
