@@ -7,4 +7,6 @@ $ - declara variavel
 
 . é a ligação entre um valor e outro == $nomeCompleto = $nome. " " .$sobrenome
 
-arrays 
+arrays
+
+null lao - teste de condicional - estrutura de decisão

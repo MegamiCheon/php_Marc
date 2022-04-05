@@ -1,5 +1,37 @@
 <?php 
 
+    $type = 'photo';
+
+    switch($type){
+        case 'photo':echo'exibindo uma foto';break;
+        case 'video':echo'exibindo um video';break;
+        case 'texto':echo'exibindo um texto';break;
+        default:echo 'valor invalido';break;
+
+    }
+
+
+
+
+    if ($type == 'photo'){
+        echo 'exibindo uma foto';
+    }
+    if ($type == 'video'){
+        echo 'exibindo um video';
+    }
+    if ($type == 'text'){
+        echo 'exibindo um texto';
+    }
+    
+    /* $nome = 'Laiz';
+    $sobrenome = 'Detros';
+
+    // teste condicional
+
+    $fullname = $nome;
+    $fullname .= isset($sobrenome)?$sobrenome:''; // 1ª forma
+    $fullname .= $sobrenome ?? ''; //1ª forma
+
     /* echo "Aula php <br>";
     print("Receita de bolo");
 
@@ -17,7 +49,7 @@
     echo $ingredientes[2]. "<br>";
     echo $ingredientes[3]. "<br>";
     echo $ingredientes[4]. "<br>";
-    echo $ingredientes[5]. "<br>"; */
+    echo $ingredientes[5]. "<br>";
 
     // Condicional alternario
 
@@ -33,6 +65,6 @@
         echo'Maior de idade';
     } else {
         echo'Menor de idade';
-    }
+    }*/
 
 ?>
