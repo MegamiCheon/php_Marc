@@ -2,19 +2,21 @@
 
    $nome = filter_input(INPUT_GET, 'nome');
    $senha = filter_input(INPUT_GET, 'senha');
+   $check = filter_input(INPUT_GET, 'est');
 
-    if ($nome){
-        echo "Nome: ".$nome;
+    if ($nome && $senha){
+        echo "Nome: ".$nome."<br>";
+        echo "Senha: ".$senha."<br>";
     } else {
-        echo "Nome: Inválido";
+        echo "Valores Inválidos";
     } echo "<br>";
 
-    if ($senha){
-        echo "Nome: ".$senha;
+    if ($check){
+        echo "Cargo: ".$check;
     } else {
-        echo "Nome: Inválido";
-    } echo "<br>";
-
+        echo "Ele não é estudante";
+    }
+    
 //    echo "Nome: ".$nome."<br>";
 //    echo "Senha: ".$senha
 

@@ -8,6 +8,8 @@
     <label for="senha">Senha: </label>
     <input type="text" name="senha"><br>
 
+    <input type="checkbox" name="est" value="Estudante"> Estudante <br>
+
     <input type="submit" value="Enviar">
     </form>
 
