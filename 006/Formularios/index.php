@@ -2,20 +2,19 @@
     require('header.php')
 ?>
 
-
-<form action="receber.php" method="get">
+<form action="receber.php" method="get" align=center>
     <h1>O que você achou do site?</h1>
-    <input type="radio" name="apro" value="MB"> Muito bom 
-    <input type="radio" name="apro" value="B"> Bom 
-    <input type="radio" name="apro" value="R"> Regular 
-    <input type="radio" name="apro" value="UL"> Um Lixo <br>
+    <input type="radio" name="apro" value="Um Lixo"> Um Lixo (1)
+    <input type="radio" name="apro" value="Ruim"> Regular (2)
+    <input type="radio" name="apro" value="Bom"> Bom (3)
+    <input type="radio" name="apro" value="Muito Bom"> Muito Bom (4) <br>
 
     <h1>Qual a seção que você mais gostou?</h1>
     <select name="film" id="film">
-        <option value="sel">Selecione</option>
-        <option value="lan">Em Lançamento</option>
-        <option value="esp">Em Cartaz</option>
-        <option value="old">Old</option>
+        <option value="Selecione">Selecione</option>
+        <option value="Em Lançamento">Em Lançamento</option>
+        <option value="Em Cartaz">Em Cartaz</option>
+        <option value="Old">Old</option>
     </select>
     <label for="outra">Outra: </label>
     <input type="text" name="outra"><br>
@@ -31,12 +30,8 @@
     <label for="fone">Telefone: </label>
     <input type="text" name="fone"><br>
 
-    <input type="checkbox" name="sim"> Quero receber as novidades do site por e-mail.<br>
+    <input type="checkbox" name="yon" value="sim"> Quero receber as novidades do site por e-mail.<br>
 
-    <!-- <label for="senha">Senha: </label>
-    <input type="text" name="senha"><br> -->
-
-    
     <input type="submit" value="Enviar Dados">
     <input type="reset" value="Limpar Formulário">
 </form>

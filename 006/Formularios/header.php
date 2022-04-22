@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <title>006</title>
 </head>
-<body>
+<body align=center>
 <header>
     <h1>Desafio</h1>
     <hr>
