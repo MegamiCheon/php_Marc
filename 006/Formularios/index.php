@@ -4,10 +4,10 @@
 
 <form action="receber.php" method="get" align=center>
     <h1>O que você achou do site?</h1>
-    <input type="radio" name="apro" value="Um Lixo"> Um Lixo (1)
-    <input type="radio" name="apro" value="Ruim"> Regular (2)
-    <input type="radio" name="apro" value="Bom"> Bom (3)
-    <input type="radio" name="apro" value="Muito Bom"> Muito Bom (4) <br>
+    <input type="radio" name="apro" value="Um Lixo"> Um Lixo
+    <input type="radio" name="apro" value="Ruim"> Regular
+    <input type="radio" name="apro" value="Bom"> Bom
+    <input type="radio" name="apro" value="Muito Bom"> Muito Bom <br>
 
     <h1>Qual a seção que você mais gostou?</h1>
     <select name="film" id="film">

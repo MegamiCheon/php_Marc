@@ -1,6 +1,6 @@
 <?php 
 
-    $prov = filter_has_var(INPUT_GET, 'apro');
+    $prov = filter_input(INPUT_GET, 'apro');
     $fil = filter_input(INPUT_GET, 'film');
     $other = filter_input(INPUT_GET, 'outra');
     $commt = filter_input(INPUT_GET, 'comt');
@@ -16,7 +16,7 @@
 
     if ($prov){
         echo "<h2>Nota:</h2><br>";
-        echo "Deu nota ".$prov." para o site <br>";
+        echo "Selecionou: ".$prov;
     } else {
         echo "<h2>Nota:</h2><br>";
         echo "Não deu nota para o site";
