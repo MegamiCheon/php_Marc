@@ -1,5 +1,13 @@
 <?php
     require("../template/header.php");
+
+    //Isset verifica se o arquivo ta vazio
+    if(isset($_COOKIE['nome'])){
+        echo "<h2>Olá</h2>".$_COOKIE['nome']."</h2>";
+    } else {
+        echo "<h2>Não tem informação no cookie</h2>"
+    }
+
 ?>
 
 <form action="" method="post">
