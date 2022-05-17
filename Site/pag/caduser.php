@@ -1,22 +1,60 @@
 <?php
     require("../template/header.php");
+
+    $email = $nome = $fone = $senha = "";
+    $emailerr = $nomeerr = $foneerr = $senhaerr = "";
+
+    function test_input($data){
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+
+        return $data;
+    }
+
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+        if (empty($_POST['email'])){
+            $emailerr = "Email é obrigatório";
+        } else {
+            $email = test_input($_POST["email"]);
+        }
+        if(empty($_POST['nome'])){
+            $nomeerr = "Nome é obrigatório";
+        } else {
+            $nome = test_input($_POST['nome']);
+        }
+        if(empty($_POST['fone'])){
+            $foneerr = "Telefone é obrigatório";
+        } else {
+            $fone = test_input($_POST['fone']);
+        }
+        if (empty($_POST['senha'])){
+            $senhaerr = "Senha é obrigatória";
+        } else {
+            $senha = test_input($_POST['senha']);
+        }
+    }
 ?>
 
 <h1>Cadastro D Usuário</h1>
 
-<form action="" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 <fieldset>
     <label for="email">E-mail</label>
-    <input type="mail" name="email"><br>
+    <input type="mail" name="email" value=<?php echo $email; ?>>
+    <span>*<?php echo $emailerr?></span><br>
 
     <label for="nome">Nome:</label>
-    <input type="text" name="nome"><br>
+    <input type="text" name="nome" value=<?php echo $nome; ?>>
+    <span>*<?php echo $nomeerr?></span><br>
 
     <label for="fone">Telefone:</label>
-    <input type="text" name="fone"><br>
+    <input type="text" name="fone" value=<?php echo $fone; ?>>
+    <span>*<?php echo $foneerr?></span><br>
 
     <label for="senha">Senha:</label>
-    <input type="password" name="pass"><br>
+    <input type="password" name="senha" value=<?php echo $senha; ?>>
+        <span>*<?php echo $senhaerr?></span><br>
 </fieldset>
 <fieldset>
     <input type="checkbox" name="adm" value="ADM"><br>
