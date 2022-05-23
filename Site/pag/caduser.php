@@ -57,7 +57,8 @@
         <span>*<?php echo $senhaerr?></span><br>
 </fieldset>
 <fieldset>
-    <input type="checkbox" name="adm" value="ADM"><br>
+    <input type="checkbox" name="adm" value="ADM">
+    <label for="adm">Administrador</label><br>
     <input type="submit" value="Cadastrar">
     <input type="reset" value="Limpar">
 </fieldset>
