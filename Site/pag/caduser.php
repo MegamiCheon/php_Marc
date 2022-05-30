@@ -1,8 +1,10 @@
 <?php
     require("../template/header.php");
 
-    $email = $nome = $fone = $senha = "";
-    $emailerr = $nomeerr = $foneerr = $senhaerr = "";
+    include "../include/MySQL.php";
+
+    $email = $nome = $fone = $senha = $msg = "";
+    $emailerr = $nomeerr = $foneerr = $senhaerr = $msgerr = "";
 
     function test_input($data){
         $data = trim($data);
@@ -12,7 +14,7 @@
         return $data;
     }
 
-    if($_SERVER['REQUEST_METHOD'] == "POST"){
+    if($_SERVER['REQUEST_METHOD'] == "POST") && isset($_POST['cadastro'])){
         if (empty($_POST['email'])){
             $emailerr = "Email é obrigatório";
         } else {
@@ -33,7 +35,23 @@
         } else {
             $senha = test_input($_POST['senha']);
         }
+        if (empty($_POST['adm'])){
+            $adm = false;
+        } else {
+            $adm = true;
+        }
     }
+
+    //Inserir no banco de dados
+
+    $sql = $pdo ->prepare("INSERT INTO USER (cod, nome. email, senha, fone, adm)
+                        VALUES (null, ?, ?, ?, ?, ?)");
+    if($sql->execute(array($nome, $email, $senha, $fone, $adm))){
+        $msg = "Dados cadastrados com sucesso"
+    } else {
+        $msgerr = "Dados não cadastrados"
+    }
+
 ?>
 
 <h1>Cadastro D Usuário</h1>
@@ -55,11 +73,12 @@
     <label for="senha">Senha:</label>
     <input type="password" name="senha" value=<?php echo $senha; ?>>
         <span>*<?php echo $senhaerr?></span><br>
-</fieldset>
-<fieldset>
+
     <input type="checkbox" name="adm" value="ADM">
     <label for="adm">Administrador</label><br>
-    <input type="submit" value="Cadastrar">
+</fieldset>
+<fieldset>
+    <input type="submit" value="Cadastrar" name="cadastro">
     <input type="reset" value="Limpar">
 </fieldset>
 </form>
