@@ -1,8 +1,8 @@
 <?php
-    require("../template/header.php");
+    include '../include/MySQL.php';
 
-    $email = $nome = $fone = $senha = "";
-    $emailerr = $nomeerr = $foneerr = $senhaerr = "";
+    $email = $nome = $fone = $senha = $adm =  $msg = "";
+    $emailerr = $nomeerr = $foneerr = $senhaerr = $msgerr ="";
 
     function test_input($data){
         $data = trim($data);
@@ -12,7 +12,7 @@
         return $data;
     }
 
-    if($_SERVER['REQUEST_METHOD'] == "POST"){
+    if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['cad'])){
         if (empty($_POST['email'])){
             $emailerr = "Email é obrigatório";
         } else {
@@ -33,7 +33,43 @@
         } else {
             $senha = test_input($_POST['senha']);
         }
+        if(empty($_POST['adm'])){
+            $adm = false;
+        } else {
+            $adm = true;
+        }
+
+        //Verificar se existe usuário
+
+        if($email && $nome && $senha && $telefone){
+        
+        //Inserir no banco de dados
+            $sql = $pdo->prepare("INSERT INTO USER (code, nome, email, senha, telefone, adm)
+                                VALUES (null, ?, ?, ?, ?, ?)");
+            if ($sql->execute(array($nome, $email, $senha, $fone, $adm))){
+                $msg = "dados cadastrados com sucesso";
+            } else {
+                $msgerr = "dados não cadastrados";
+            }
+        } else {
+            $msgerr = "dados não informados";
+        }
     }
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Usuário</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+
+<?php 
+
+    require("../template/header.php");
+
 ?>
 
 <h1>Cadastro D Usuário</h1>
@@ -55,11 +91,11 @@
     <label for="senha">Senha:</label>
     <input type="password" name="senha" value=<?php echo $senha; ?>>
         <span>*<?php echo $senhaerr?></span><br>
-</fieldset>
-<fieldset>
     <input type="checkbox" name="adm" value="ADM">
     <label for="adm">Administrador</label><br>
-    <input type="submit" value="Cadastrar">
+</fieldset>
+<fieldset>
+    <input type="submit" value="Cadastrar" name="cad">
     <input type="reset" value="Limpar">
 </fieldset>
 </form>
