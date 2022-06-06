@@ -40,6 +40,8 @@
         } else {
             $adm = true;
         }
+
+        
     }
 
     //Inserir no banco de dados
