@@ -20,16 +20,18 @@
 
       foreach($info as $key => $values){
         echo "<tr>";
-        echo '<td>'.$values['code'].'</td>';
-        echo '<td>'.$values['nome'].'</td>';
-        echo '<td>'.$values['email'].'</td>';
-        echo '<td>'.$values['telefone'].'</td>';
-        echo '<td>'.$values['senha'].'</td>';
-        echo '<td>'.$values['adm'].'</td>';
-        echo '<td></td>';
-        echo '<td></td>';
+        echo "<td>".$values['code']."</td>";
+        echo "<td>".$values['nome']."</td>";
+        echo "<td>".$values['email']."</td>";
+        echo "<td>".$values['telefone']."</td>";
+        echo "<td>".$values['senha']."</td>";
+        echo "<td>".$values['adm']."</td>";
+        echo "<td><center><a href='altUser.php?code=".$values['code']."'>(+)</a></center></td>";
+        echo "<td><center><a href='delUser.php?code=".$values['code']."'>(+)</a></center></td>";
         echo "</tr>";
       }
+
+      echo "</table>";
   }
 
 ?>
