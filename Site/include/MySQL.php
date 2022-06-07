@@ -4,7 +4,7 @@
     define('DB', 'EMI');
     define('USER', 'root');
     define('PASS', '');
-    define('PORT', '3306');
+    define('PORT', '3308');
 
     try{
         //conexao
