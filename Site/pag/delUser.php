@@ -9,7 +9,7 @@
         $sql = $pdo -> prepare("DELETE FROM user WHERE code=?");
         if ($sql->execute(array($code))){
             echo "Usuário excluído com sucesso";
-            header('location:listuser.php')
+            header('location:listuser.php');
         } else {
             echo "Erro: Dados não foram excluídos <br>";
             echo "Comando: $sql. <br>";
