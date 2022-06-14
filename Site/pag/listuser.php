@@ -27,7 +27,7 @@
         echo "<td>".$values['senha']."</td>";
         echo "<td>".$values['adm']."</td>";
         echo "<td><center><a href='altUser.php?code=".$values['code']."'>(+)</a></center></td>";
-        echo "<td><center><a href='delUser.php?code=".$values['code']."'>(+)</a></center></td>";
+        echo "<td><center><a href='delUser.php?code=".$values['code']."'>(-)</a></center></td>";
         echo "</tr>";
       }
 

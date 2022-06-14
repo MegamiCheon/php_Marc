@@ -2,6 +2,7 @@
 include "../include/MySQL.php";
 include "../include/function.php";
 
+$code; 
 $email = $senha = $nome = $fone = $adm = "";
 $emailerr = $senhaerr = $nomeerr = $foneerr = $msgerr = "";
 
@@ -22,6 +23,9 @@ if(isset($_GET['code'])){
 }
 
 if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['cad'])){
+    if (!empty($_POST['code'])){
+        $code = test_input($_POST["code"]);
+    }    
     if (empty($_POST['email'])){
         $emailerr = "Email é obrigatório";
     } else {
@@ -49,26 +53,23 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['cad'])){
     }
 
     if($email && $senha && $nome && $fone){
-        $sql = $pdo ->prepare("SELECT * FROM user WHERE email = ?");
-        if ($sql->execute(array($email))){
+        $sql = $pdo ->prepare("SELECT * FROM user WHERE email = ? AND code <> ?");
+        if ($sql->execute(array($email, $code))) {
+
             if($sql->rowCount()>0){
-                $msgerr = "Email já cadastrado";
-            } else { 
-            //Inserir no banco de dados
-                $sql = $pdo->prepare("INSERT INTO USER (code, nome, email, senha, telefone, adm)
-                                    VALUES (null, ?, ?, ?, ?, ?)");
-                if ($sql->execute(array($nome, $email, $senha, $fone, $adm))){
-                    $msg = "dados cadastrados com sucesso";
-                    header("location: log.php");
+                $msgerr = "Email já cadastrado para outro usuário";
+            } else {
+                $sql = $pdo->prepare("UPDATE user SET nome=?, email=?, senha=?, telefone=?, adm=? WHERE code=?");
+                if ($sql->execute(array($nome, $email, $senha, $fone, $adm, $code))){
+                    $msgerr = "Dados alterados com sucesso";
                 } else {
-                    $msgerr = "dados não cadastrados";
+                    $msgerr = "Dados não alterados";
                 }
             }
-        } else {
-            $msgerr = "Erro no comando select";
+
         }
     } else {
-        $msgerr = "Dados não cadastrados11";
+        $msgerr = "Dados não informados";
     }
 }
 
