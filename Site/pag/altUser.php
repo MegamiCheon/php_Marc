@@ -16,15 +16,15 @@ if(isset($_GET['code'])){
             $nome = $value['nome'];
             $email = $value['email'];
             $fone = $value['telefone'];
-            $senha = $value['senha'];
+            $senha = // $value['senha'];
             $adm = $value['adm'];
         }
     }
 }
 
 if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['cad'])){
-    if (!empty($_POST['code'])){
-        $code = test_input($_POST["code"]);
+    if (isset($_POST['code'])){
+        $code = $_POST["code"];
     }    
     if (empty($_POST['email'])){
         $emailerr = "Email é obrigatório";
@@ -60,8 +60,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['cad'])){
                 $msgerr = "Email já cadastrado para outro usuário";
             } else {
                 $sql = $pdo->prepare("UPDATE user SET nome=?, email=?, senha=?, telefone=?, adm=? WHERE code=?");
-                if ($sql->execute(array($nome, $email, $senha, $fone, $adm, $code))){
+                if ($sql->execute(array($nome, $email, MD5($senha), $fone, $adm, $code))){
                     $msgerr = "Dados alterados com sucesso";
+                    header ('location: listuser.php');
                 } else {
                     $msgerr = "Dados não alterados";
                 }
@@ -113,7 +114,7 @@ require("../template/header.php");
 <label for="senha">Senha:</label>
 <input type="password" name="senha" value=<?php echo $senha; ?>>
     <span>*<?php echo $senhaerr?></span><br>
-<input type="checkbox" name="adm" value="ADM">
+<input type="checkbox" name="adm" value="ADM" <?php if ($adm==1){?> checked="checked"<?php } ?>>
 <label for="adm">Administrador</label><br>
 </fieldset>
 <fieldset>

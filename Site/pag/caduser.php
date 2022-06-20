@@ -48,7 +48,7 @@
                 //Inserir no banco de dados
                     $sql = $pdo->prepare("INSERT INTO USER (code, nome, email, senha, telefone, adm)
                                         VALUES (null, ?, ?, ?, ?, ?)");
-                    if ($sql->execute(array($nome, $email, $senha, $fone, $adm))){
+                    if ($sql->execute(array($nome, $email, MD5($senha), $fone, $adm))){
                         $msg = "dados cadastrados com sucesso";
                         header("location: log.php");
                     } else {

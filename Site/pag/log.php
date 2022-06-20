@@ -1,16 +1,10 @@
 <?php
     require("../template/header.php");
+    require("../include/MySQL.php");
+    require("../include/function.php");
 
     $email = $senha = "";
     $emailerr = $senhaerr = "";
-
-    function test_input($data){
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-
-        return $data;
-    }
 
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         if (empty($_POST['email'])){
@@ -23,9 +17,19 @@
         } else {
             $senha = test_input($_POST['senha']);
         }
-    }
 
     // código para consultar os dados no banco de dados
+    // Inserir no banco de dados
+    $sql = $pdo->prepare("SELECT * FROM user WHERE email = ? AND senha = ?");
+    if ($sql->execute(array($email, MD5($senha)))){
+        $info = $sql->fetchAll(PDO::FETCH_ASSOC);
+        if (count($info)>0){
+            header('location:listuser.php');
+        } else {
+            echo '<h6>Email de Usuário não cadastro</h6>';
+        }
+    }
+    }
 
 ?>
 
