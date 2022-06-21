@@ -1,7 +1,11 @@
 <?php
-    require("../template/header.php");
+
     require("../include/MySQL.php");
     require("../include/function.php");
+
+    session_start();
+    $_SESSION['nome']="";
+    $_SESSION['adm']="";
 
     $email = $senha = "";
     $emailerr = $senhaerr = "";
@@ -24,12 +28,32 @@
     if ($sql->execute(array($email, MD5($senha)))){
         $info = $sql->fetchAll(PDO::FETCH_ASSOC);
         if (count($info)>0){
-            header('location:listuser.php');
+            foreach($info as $key => $value){
+                $_SESSION['nome'] = $value['nome'];
+                $_SESSION['adm'] = $value['adm'];
+            }
+            header('location:main.php');
         } else {
             echo '<h6>Email de Usuário não cadastro</h6>';
         }
     }
-    }
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Login</title>
+</head>
+<body>
+
+<?php
+    require("../template/header.php");
 
 ?>
 
@@ -54,3 +78,6 @@
 <?php
     require("../template/footer.php");
 ?>
+
+</body>
+</html>
