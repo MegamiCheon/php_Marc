@@ -53,8 +53,10 @@
 <body>
 
 <?php
-    require("../template/header.php");
-
+    echo '<link rel="stylesheet" href="./Site/css/style.css">';
+    
+    echo "<h1>Menu</h1>";
+    echo "<hr>"
 ?>
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

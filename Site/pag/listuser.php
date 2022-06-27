@@ -41,8 +41,8 @@
         echo "<td><center><a href='delUser.php?code=".$values['code']."'>(-)</a></center></td>";
         echo "</tr>";
       }
-
       echo "</table>";
+      echo "<button><a href='main.php'>Voltar para página principal</a></button>";
   }
 
 ?>

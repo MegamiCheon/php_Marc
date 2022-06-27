@@ -126,6 +126,8 @@ require("../template/header.php");
 </fieldset>
 </form>
 
+<button><a href="listuser.php">Voltar a lista de usuários</a></button>
+
 <?php
 require("../template/footer.php");
 ?>
