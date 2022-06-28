@@ -21,10 +21,12 @@ require("../template/header.php");
 
     <h2>
         Olá <?php echo $_SESSION['nome']?><br></h2><br>
-        <h3>Você é admin?<br> <?php if($_SESSION['adm']==1) echo "<a href='listuser.php'>lista de usuários</a>"; else echo"<h4><br>Não</h4>";?></h3><br>
+        <h3>Você é admin?<br> <?php
+        
+        if($_SESSION['adm']==1) echo "<a href='listuser.php'>lista de usuários</a>"; else echo"<h4><br>Não</h4>";?></h3><br>
         <button><a href="logout.php">Encerrar Sessão</a></button>
 
-<?php
+    <?php
 
 require("../template/footer.php");
 
