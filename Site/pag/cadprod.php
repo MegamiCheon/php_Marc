@@ -1,51 +1,56 @@
 <?php
+    include '../include/function.php';
     include '../include/MySQL.php';
 
-    $nom = $desc = $valor = $msg = "";
-    $nomerr = $descerr = $valorerr = $msgerr = "";
-
     $msgErro = "";
-    if(isset($_POST['submit'])){
-        if (!empty($_FILES['imagens']['name'])){
-            $fileName = basename($_FILES['imagens']['name']);
-            $fileType = pathinfo($fileName, PATHINFO-EXTENSIONS);
+    $descricao = $nome = "";
+    $valor = 0;
+
+    if (isset($_POST["submit"])){
+        if (!empty($_FILES["image"]["name"])){
+            //Pegar informações
+            $fileName = basename($_FILES["image"]["name"]);
+            $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+            //Permitir somente alguns formatos
             $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
 
             if (in_array($fileType, $allowTypes)){
-                $image = $_FILES['imagens']['tmp_name'];
+                $image = $_FILES['image']['tmp_name'];
                 $imgContent = file_get_contents($image);
 
-                if(empty($_POST['nomeprod'])){
-                        $nomrr = "Nome é obrigatório";
-                    } else {
-                        $nom = test_input($_POST['nomeprod']);
-                    }
-                    if(empty($_POST['descprod'])){
-                    $descerr = "Descrição é obrigatória";
-                    } else {
-                    $desc = test_input($_POST['descprod']);
+                if (isset($_POST['nomeprod'])){
+                    $nome = $_POST['nomeprod'];
+                } else {
+                    $nome = "";
                 }
-                    if (empty($_POST['valorprod'])){
-                        $valorerr = "Valor é obrigatório";
-                    } else {
-                        $valor = test_input($_POST['valorprod']);
+                if (isset($_POST['descprod'])){
+                    $descricao = $_POST['descprod'];
+                } else {
+                    $descricao = "";
+                }
+                if (isset($_POST['valorprod'])){
+                    $valor = $_POST['valorprod'];
+                } else {
+                    $valor = "";
                 }
 
-                 //Inserir no banco de dados
-                     $sql = $pdo->prepare("INSERT INTO PRODUCT (codprod, nomeprod, descprod, valorprod, imagens)
-                                         VALUES (null, ?, ?, ?, ?)");
-                     if ($sql->execute(array($nom, $desc, $desc, $imgContent))){
-                        $msgErro = "Dados cadastrados com sucesso!";
-                 } else {
+                //Gravar no banco
+                $sql = $pdo->prepare("INSERT INTO PRODUCT (codprod, nomeprod, descprod, valorprod, imagens)
+                                      VALUES (null, ?,?,?,?)");
+                if ($sql->execute(array($nome, $descricao, $valor, $imgContent))){
+                    $msgErro = "Dados cadastrados com suscesso!";
+                } else {
                     $msgErro = "Dados não cadastrados!";
-                 } else {
-                $msgErro = "Desculpe, mas apenas JPG, JPEG, PNG e GIF permitidos";
-            } else {
-                $msgErro = "Selecione uma imagem para upload";
-        }
-    }
-    }
-}
+                }
+
+                } else {
+                    $msgErro = "Desculpe, mas somente arquivos JPG, JPEG, PNG e GIF são permitidos";
+                }
+                } else {
+                    $msgErro = "Selecione uma imagem para upload";
+                }
+            }
+    
 ?>
 
 <!DOCTYPE html>
@@ -67,29 +72,19 @@
 
 <h1>Cadastro De Produto</h1>
 
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-<fieldset>
-    <label for="nome">Nome do Produto:</label>
-    <input type="text" name="nome" value=<?php echo $nom; ?>>
-    <span>*<?php echo $nomerr?></span><br>
-
-    <label for="desc">Descrição do Produto:</label>
-    <input type="text" name="desc" value=<?php echo $desc; ?>>
-    <span>*<?php echo $descerr?></span><br>
-
-    <label for="valor">Valor do Produto:</label>
-    <input type="text" name="valor" value=<?php echo $valor; ?>>
-    <span>*<?php echo $valorerr?></span><br>
-
-    <label for="imagem">Imagem:</label>
-    <input type="file" name="image"><br>
-</fieldset>
-<fieldset>
-    <input type="submit" value="Cadastrar" name="cad">
-    <input type="reset" value="Limpar">
-    <span>*<?php echo $msgerr?></span><br>
-</fieldset>
-</form>
+<body>
+    <form method="post" enctype="multipart/form-data">
+    <label for="nome">Nome: </label>  
+    <input type="text" name="nomeprod"><br>
+    <label for="Desc">Descrição: </label>
+    <input type="text" name="descprod"><br>
+    <label for="Val">Valor: </label>
+    <input type="text" name="valorprod"><br>
+    <label for="Img">Imagem:</label><br>
+    <input type="file" name="imagens"/><br>
+        <input type="submit" name="submit" value="Salvar" />
+    </form>
+</body>
 
 <?php
     require("../template/footer.php");
