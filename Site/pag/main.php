@@ -23,7 +23,7 @@ require("../template/header.php");
         Olá <?php echo $_SESSION['nome']?><br></h2><br>
         <h3>Você é admin?<br> <?php
         
-        if($_SESSION['adm']==1) echo "<a href='listuser.php'>lista de usuários</a><br><a href='listprod.php'>lista de produtos</a>|||<a href='cadprod.php>Cadastro de Produtos</a>"; else echo"<h4><br>Não</h4>";?></h3><br>
+        if($_SESSION['adm']==1) echo "<a href='listuser.php'>lista de usuários</a><br><a href='listprod.php'>lista de produtos</a><a href='cadprod.php>Cadastro de Produtos</a>"; else echo"<h4><br>Não</h4>";?></h3><br>
         <button><a href="logout.php">Encerrar Sessão</a></button>
 
     <?php
